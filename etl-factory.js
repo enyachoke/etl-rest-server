@@ -8,7 +8,7 @@ var reports = [];
 reports.push.apply(reports,require('./reports/hiv-summary-report.json'));
 reports.push.apply(reports,require('./reports/moh-731-report.json'));
 reports.push.apply(reports,require('./reports/patient-register-report.json'));
-
+reports.push.apply(reports,require('./reports/hiv-care-continuum-report.json'));
 //var walker = walk.walk("./reports", []);
 //walker.on("file", function (root, fileStats, next) {
 //    //test  file  to determine if its report  json
