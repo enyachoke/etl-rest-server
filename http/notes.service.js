@@ -336,7 +336,9 @@ var self = function() {
             'User-Agent': 'Request-Promise',
             'authorization': request.headers.authorization
           },
-          json: true
+          json: true,
+          rejectUnauthorized: false,
+          requestCert: true
         };
         rp(options)
           .then(function(json) {
@@ -360,7 +362,9 @@ var self = function() {
             'User-Agent': 'Request-Promise',
             'authorization': request.headers.authorization
           },
-          json: true
+          json: true,
+          rejectUnauthorized: false,
+          requestCert: true
         };
         rp(options)
           .then(function(json) {
@@ -387,7 +391,9 @@ var self = function() {
             'User-Agent': 'Request-Promise',
             'authorization': request.headers.authorization
           },
-          json: true
+          json: true,
+          rejectUnauthorized: false,
+          requestCert: true
         };
         rp(options)
           .then(function(json) {
