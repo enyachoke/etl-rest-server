@@ -1,5 +1,5 @@
 var cache = require('memory-cache');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var moduleDefinition = {
   getFromToCache: getFromToCache,
   saveToCache: saveToCache,
