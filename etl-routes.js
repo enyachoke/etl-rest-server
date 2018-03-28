@@ -1788,7 +1788,7 @@ module.exports = function () {
                         // console.log(reportParams);
 
                         if (request.query.reportName === 'MOH-731-report-2017') {
-                            let moh731 = new Moh731Report(reportParams.requestParams);
+                            let moh731 = new Moh731Report('MOH-731-greencard',reportParams.requestParams);
 
                             moh731.generateReport().then((results) => {
                                 reply(results);
@@ -1797,12 +1797,14 @@ module.exports = function () {
                                     reply(Boom.internal('An error occured', err));
                                 });
                         } else {
-                            let service = new Moh731Service();
-                            service.getAggregateReport(reportParams).then((result) => {
-                                reply(result);
-                            }).catch((error) => {
-                                reply(error);
-                            });
+                            let moh731 = new Moh731Report('MOH-731-bluecard',reportParams.requestParams);
+
+                            moh731.generateReport().then((results) => {
+                                reply(results);
+                            })
+                                .catch((err) => {
+                                    reply(Boom.internal('An error occured', err));
+                                });
 
                         }
 
