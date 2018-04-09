@@ -67,8 +67,8 @@ describe('ETL-SERVER TESTS', function () {
 
         // console.log('body2  ++', stub.args[0][0]);
         var queryParts = stub.args[0][0];
-        //get patient always fetched data from etl.flat_hiv_summary
-        expect(queryParts.table).to.equal('etl.flat_hiv_summary');
+        //get patient always fetched data from etl.flat_hiv_summary_v15b
+        expect(queryParts.table).to.equal('etl.flat_hiv_summary_v15b');
         // if fields is null output all columns
         expect(queryParts.columns).to.equal('*');
 

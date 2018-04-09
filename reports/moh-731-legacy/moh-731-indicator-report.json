@@ -10,7 +10,7 @@
       {
         "joinType": "JOIN",
         "schema": "etl",
-        "tableName": "flat_hiv_summary",
+        "tableName": "flat_hiv_summary_v15b",
         "alias": "t1",
         "indexExpression": "FORCE INDEX (loc_id_enc_date_next_clinic)",
         "joinExpression": "date(t1.encounter_datetime) <= date(t2.endDate)"
@@ -383,7 +383,7 @@
     "name": "moh-731-monthly-one-row-per-encounter",
     "table":{
       "schema":"etl",
-      "tableName":"flat_hiv_summary",
+      "tableName":"flat_hiv_summary_v15b",
       "alias":"t1"
       },
     "joins":[
@@ -576,7 +576,7 @@
     "name": "moh-731-12month-one-row-per-encounter",
     "table": {
       "schema": "etl",
-      "tableName": "flat_hiv_summary",
+      "tableName": "flat_hiv_summary_v15b",
       "alias": "t1"
     },
     "joins": [],
@@ -586,7 +586,7 @@
         "defaultValue": [
           {
             "label": "location_id",
-            "expression": "t1.arv_start_location"
+            "expression": "t1.arv_first_regimen_location_id"
           }
         ]
       },
@@ -610,7 +610,7 @@
         "parameter": "locations"
       },
       {
-        "expression": "t1.arv_start_location in ?",
+        "expression": "t1.arv_first_regimen_location_id in ?",
         "parameter": "locations"
       },
       {
@@ -670,7 +670,7 @@
     "name": "moh-731-cumulative-one-row-per-patient",
     "table":{
       "schema":"etl",
-      "tableName":"flat_hiv_summary",
+      "tableName":"flat_hiv_summary_v15b",
       "alias":"t1"
       },
     "joins":[
@@ -684,14 +684,14 @@
       ]
       },
       {"name":"groupByLocation", "defaultValue":[
-        {"label":"location","expression":"t1.arv_start_location"}
+        {"label":"location","expression":"t1.arv_first_regimen_location_id"}
       ]
       }
     ],
     "filters": [
       {"expression":"(t1.next_clinical_datetime_hiv is null or date(t1.next_clinical_datetime_hiv) > ?)", "parameter":"endDate"},
       {"expression":"t1.is_clinical_encounter = 1", "processForce":true},
-      {"expression":"t1.arv_start_location in ?","parameter":"locations"},
+      {"expression":"t1.arv_first_regimen_location_id in ?","parameter":"locations"},
       {"expression":"coalesce(t1.death_date, out_of_care) is null", "processForce":true},
       {"expression":"date(t1.encounter_datetime) <= ?", "parameter":"endDate"}
     ],

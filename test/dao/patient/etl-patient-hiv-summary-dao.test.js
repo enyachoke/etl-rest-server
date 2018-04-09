@@ -41,7 +41,7 @@ describe('ETL PATIENT HIV SUMMARY DAO:', function () {
             // should return a promise
             var expectedQueryObj = {
                 columns: '*',
-                table: 'etl.flat_hiv_summary',
+                table: 'etl.flat_hiv_summary_v15b',
                 where: ['uuid = ? AND is_clinical_encounter = true', 'patient uuid'],
                 order: [{
                     column: 'encounter_datetime',
@@ -54,7 +54,7 @@ describe('ETL PATIENT HIV SUMMARY DAO:', function () {
             var mockOutput = {
                 result: [],
                 size: 0,
-                sql: 'SELECT * FROM etl.flat_hiv_summary `t1` WHERE (uuid = ?) ORDER BY encounter_datetime DESC LIMIT 100',
+                sql: 'SELECT * FROM etl.flat_hiv_summary_v15b `t1` WHERE (uuid = ?) ORDER BY encounter_datetime DESC LIMIT 100',
                 sqlParams: ['patient uuid'],
                 startIndex: '0'
             };

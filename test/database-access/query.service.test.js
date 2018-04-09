@@ -22,7 +22,7 @@ describe('Query Service', function () {
     });
 
     it('executeQuery should resolve with a promise', (done) => {      
-        queryService.executeQuery('select * from etl.flat_hiv_summary limit 100').then( (result) => {
+        queryService.executeQuery('select * from etl.flat_hiv_summary_v15b limit 100').then( (result) => {
             expect(result).to.equal('');
           }).then(done, done)
       });

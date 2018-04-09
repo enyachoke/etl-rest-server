@@ -3,7 +3,7 @@
     "name": "moh-731-12month-cohort-one-row-per-encounter",
     "table":{
       "schema":"etl",
-      "tableName":"flat_hiv_summary",
+      "tableName":"flat_hiv_summary_v15b",
       "indexExpression": "FORCE INDEX (location_uuid_rtc_date)",
       "alias":"t1"
       },

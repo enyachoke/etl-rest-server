@@ -3,7 +3,7 @@
         "name": "attended",
         "table": {
             "schema": "etl",
-            "tableName": "flat_hiv_summary",
+            "tableName": "flat_hiv_summary_v15b",
             "alias": "t1"
         },
         "joins": [
@@ -122,7 +122,7 @@
         "name": "has-not-returned-report",
         "table": {
             "schema": "etl",
-            "tableName": "flat_hiv_summary",
+            "tableName": "flat_hiv_summary_v15b",
             "alias": "t1"
         },
         "joins": [
@@ -136,7 +136,7 @@
             {
                 "joinType": "LEFT OUTER JOIN",
                 "schema": "etl",
-                "tableName": "flat_hiv_summary",
+                "tableName": "flat_hiv_summary_v15b",
                 "alias": "t8",
                 "joinExpression": "(t1.person_id = t8.person_id AND t8.encounter_type = 116 AND t1.encounter_datetime < t8.encounter_datetime)"
             },
@@ -269,7 +269,7 @@
         "name": "has-not-returned-cohort",
         "table": {
             "schema": "etl",
-            "tableName": "flat_hiv_summary",
+            "tableName": "flat_hiv_summary_v15b",
             "alias": "t2"
         },
         "joins": [],
@@ -327,7 +327,7 @@
         "name": "scheduled",
         "table": {
             "schema": "etl",
-            "tableName": "flat_hiv_summary",
+            "tableName": "flat_hiv_summary_v15b",
             "alias": "t1"
         },
         "joins": [

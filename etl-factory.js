@@ -736,7 +736,7 @@ module.exports = function () {
             'case when (timestampdiff(day,t1.vl_order_date,now()) between 0 and 14) and (t1.vl_1_date is null or t1.vl_order_date > t1.vl_1_date) then true else false end as has_pending_vl_test',
             'date_format(t1.enrollment_date,"%d-%m-%Y") as enrollment_date',
             'date_format(t1.hiv_start_date,"%d-%m-%Y") as hiv_start_date',
-            't1.arv_start_location',
+            't1.arv_first_regimen_location_id',
             'date_format(t1.arv_first_regimen_start_date,"%d-%m-%Y") as arv_first_regimen_start_date',
             'date_format(t1.arv_start_date,"%d-%m-%Y") as cur_regimen_arv_start_date',
             't1.cur_arv_line',
@@ -745,7 +745,6 @@ module.exports = function () {
             't1.vl_1',
             'date_format(t1.vl_1_date,"%d-%m-%Y") as vl_1_date',
             'date_format(t1.rtc_date,"%d-%m-%Y") as rtc_date',
-            'date_format(t1.tb_prophylaxis_start_date,"%d-%m-%Y") as tb_prophylaxis_start_date',
             'date_format(t1.pcp_prophylaxis_start_date,"%d-%m-%Y") as pcp_prophylaxis_start_date',
             'date_format(t1.tb_tx_start_date,"%d-%m-%Y") as tb_tx_start_date',
             't1.encounter_type',
@@ -766,7 +765,7 @@ module.exports = function () {
                             if (singleIndicator.expression === requestIndicatorName) {
                                 // handle dates table
                                 if (report.patientListColumns) extraPatientListColumns = report.patientListColumns;
-                                if (report.table.tableName !== 'flat_hiv_summary') reportName = dataSet;
+                                if (report.table.tableName !== 'flat_hiv_summary_v15b') reportName = dataSet;
                             }
                         });
 
@@ -827,7 +826,7 @@ module.exports = function () {
                 ];
                 columns.push.apply(columns, reportDataSet.extraPatientListColumns);
                 var schema = report.table['schema'] === '' ? 'etl' : report.table['schema'];
-                var tableName = report.table['tableName'] === '' ? 'flat_hiv_summary' : report.table['tableName'];
+                var tableName = report.table['tableName'] === '' ? 'flat_hiv_summary_v15b' : report.table['tableName'];
                 var queryParts = {
                     columns: columns,
                     concatColumns: [

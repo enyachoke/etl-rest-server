@@ -1,6 +1,6 @@
 [{
  "name": "hiv-care-continuum",
- "table":{"schema":"etl","tableName":"flat_hiv_summary","alias":"t1"},
+ "table":{"schema":"etl","tableName":"flat_hiv_summary_v15b","alias":"t1"},
  "joins":[
      {"joinType":"INNER JOIN","schema":"amrs","tableName":"location","alias":"t2","joinExpression":"t1.location_uuid = t2.uuid"}
  ],
@@ -172,7 +172,7 @@
 },
 {
  "name": "hiv-care-continuum-enrolled",
- "table":{"schema":"etl","tableName":"flat_hiv_summary","alias":"t1"},
+ "table":{"schema":"etl","tableName":"flat_hiv_summary_v15b","alias":"t1"},
  "joins":[
      {"joinType":"INNER JOIN","schema":"amrs","tableName":"location","alias":"t2","joinExpression":"t1.location_uuid = t2.uuid"}
  ],
@@ -274,7 +274,7 @@
 ,
 {
  "name": "hiv-care-continuum-on-arv-past-6-months",
- "table":{"schema":"etl","tableName":"flat_hiv_summary","alias":"t1"},
+ "table":{"schema":"etl","tableName":"flat_hiv_summary_v15b","alias":"t1"},
  "joins":[
      {"joinType":"INNER JOIN","schema":"amrs","tableName":"location","alias":"t2","joinExpression":"t1.location_uuid = t2.uuid"}
  ],
@@ -381,7 +381,7 @@
 
 {
  "name": "hiv-care-continuum-virally-suppressed",
- "table":{"schema":"etl","tableName":"flat_hiv_summary","alias":"t1"},
+ "table":{"schema":"etl","tableName":"flat_hiv_summary_v15b","alias":"t1"},
  "joins":[
      {"joinType":"INNER JOIN","schema":"amrs","tableName":"location","alias":"t2","joinExpression":"t1.location_uuid = t2.uuid"}
  ],
@@ -505,7 +505,7 @@
 },
 {
  "name": "hiv-care-continuum-not-virally-suppressed",
- "table":{"schema":"etl","tableName":"flat_hiv_summary","alias":"t1"},
+ "table":{"schema":"etl","tableName":"flat_hiv_summary_v15b","alias":"t1"},
  "joins":[
      {"joinType":"INNER JOIN","schema":"amrs","tableName":"location","alias":"t2","joinExpression":"t1.location_uuid = t2.uuid"}
  ],

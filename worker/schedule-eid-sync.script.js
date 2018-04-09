@@ -362,7 +362,7 @@ var service = {
     },
     schedulePatientsWithMissingVlPastOneYear: function () {
         var sql = "replace into  etl.eid_sync_queue(person_uuid) " +
-            "(select uuid from etl.flat_hiv_summary where timestampdiff(month, vl_1_date, now()) >= 11 and timestampdiff(month,arv_start_date,now()) >= 4 and is_clinical_encounter=1 and next_clinical_datetime_hiv is null and timestampdiff(month,encounter_datetime,now()) <= 18)";
+            "(select uuid from etl.flat_hiv_summary_v15b where timestampdiff(month, vl_1_date, now()) >= 11 and timestampdiff(month,arv_start_date,now()) >= 4 and is_clinical_encounter=1 and next_clinical_datetime_hiv is null and timestampdiff(month,encounter_datetime,now()) <= 18)";
         // sql = sql.replace('?', startDate);
         // console.log(sql);
 

@@ -25,7 +25,7 @@ module.exports = function () {
 
             var queryParts = {
                 columns: request.query.fields || "t1.*,t2.gender,round(datediff(t1.encounter_datetime,t2.birthdate)/365) as age,group_concat(identifier) as identifiers",
-                table: "etl.flat_hiv_summary",
+                table: "etl.flat_hiv_summary_v15b",
                 joins: [
                     ['amrs.person', 't2', 't1.person_id = t2.person_id'],
                     ['amrs.patient_identifier', 't3', 't1.person_id=t3.patient_id']
@@ -81,7 +81,7 @@ module.exports = function () {
 
             var queryParts = {
                 columns: request.query.fields || "t1.*,t3.given_name,t3.middle_name,t3.family_name,group_concat(identifier) as identifiers",
-                table: "etl.flat_hiv_summary",
+                table: "etl.flat_hiv_summary_v15b",
                 joins: [
                     //  ['etl.derived_encounter', 't2', 't1.encounter_id = t2.encounter_id'],
                     ['amrs.person_name', 't3', 't1.person_id = t3.person_id and (t3.voided is null || t3.voided = 0)'],
@@ -113,7 +113,7 @@ module.exports = function () {
 
             var queryParts = {
                 columns: request.query.fields || "t1.*,t3.given_name,t3.middle_name,t3.family_name,group_concat(identifier) as identifiers",
-                table: "etl.flat_hiv_summary",
+                table: "etl.flat_hiv_summary_v15b",
                 joins: [
                     //    ['etl.derived_encounter', 't2', 't1.encounter_id = t2.encounter_id'],
                     ['amrs.person_name', 't3', 't1.person_id = t3.person_id and (t3.voided is null || t3.voided = 0)'],
@@ -145,7 +145,7 @@ module.exports = function () {
 
             var queryParts = {
                 columns: request.query.fields || "t1.*,t3.given_name,t3.middle_name,t3.family_name,group_concat(identifier) as identifiers",
-                table: "etl.flat_hiv_summary",
+                table: "etl.flat_hiv_summary_v15b",
                 joins: [
                     ['amrs.person_name', 't3', 't1.person_id = t3.person_id and (t3.voided is null || t3.voided = 0)'],
                     ['amrs.patient_identifier', 't4', 't1.person_id=t4.patient_id']
@@ -174,7 +174,7 @@ module.exports = function () {
 
             var queryParts = {
                 columns: request.query.fields || ["date(rtc_date) as rtc_date", "date_format(rtc_date,'%W') as day_of_week", "count( distinct t1.person_id) as total"],
-                table: "etl.flat_hiv_summary",
+                table: "etl.flat_hiv_summary_v15b",
                 where: ["t1.location_uuid = ? and date_format(rtc_date,'%Y-%m') = date_format(?,'%Y-%m')", uuid, startDate],
                 group: ['rtc_date'],
                 order: order || [{
@@ -208,11 +208,11 @@ module.exports = function () {
                 "       (CASE WHEN CURDATE() > d THEN scheduled_and_attended ELSE 0 END) as scheduled_and_attended," +
                 "       (CASE WHEN CURDATE() >  d THEN has_not_returned ELSE 0 END) as has_not_returned from" +
                 "  (SELECT date(rtc_date) AS d, 'schedule' AS description, date_format(rtc_date,'%W') AS day_of_week, count(DISTINCT t1.person_id) AS total_scheduled,location_id, count(DISTINCT if(next_clinical_datetime_hiv IS NOT NULL,t1.person_id,NULL)) AS scheduled_and_attended, count(DISTINCT if(next_clinical_datetime_hiv IS NULL,t1.person_id,NULL)) AS has_not_returned" +
-                "   FROM etl.flat_hiv_summary t1" +
+                "   FROM etl.flat_hiv_summary_v15b t1" +
                 "   WHERE t1.location_uuid = ?" +
                 "     AND rtc_date BETWEEN ? AND ?  GROUP BY d" +
                 "   UNION SELECT date(encounter_datetime) AS d, 'encounter' AS description, date_format(encounter_datetime,'%W') AS day_of_week, count(DISTINCT t1.person_id) AS total_visits,location_id, count(DISTINCT if(next_clinical_datetime_hiv IS NOT NULL,t1.person_id,NULL)) AS scheduled_and_attended, count(DISTINCT if(next_clinical_datetime_hiv IS NULL,t1.person_id,NULL)) AS has_not_returned" +
-                "   FROM etl.flat_hiv_summary t1" +
+                "   FROM etl.flat_hiv_summary_v15b t1" +
                 "   WHERE t1.location_uuid = ? " +
                 "     AND date(encounter_datetime) BETWEEN ? AND ?" +
                 "   GROUP BY d) AS a GROUP BY d;";
@@ -228,7 +228,7 @@ module.exports = function () {
 
             var queryParts = {
                 columns: request.query.fields || ["date(encounter_datetime) as visit_date", "date_format(encounter_datetime,'%W') as day_of_week", "count( distinct t1.person_id) as total"],
-                table: "etl.flat_hiv_summary",
+                table: "etl.flat_hiv_summary_v15b",
                 where: ["t1.location_uuid = ? and date_format(encounter_datetime,'%Y-%m') = date_format(?,'%Y-%m')", uuid, startDate],
                 group: ['encounter_datetime'],
                 order: order || [{

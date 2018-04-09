@@ -208,7 +208,7 @@ describe('CLINIC LEVEL ETL-SERVER TESTS', function () {
 
         // console.log('body2  ++', stub.args[0][0]);
         var queryParts = stub.args[0][0];
-        expect(queryParts.table).to.equal('etl.flat_hiv_summary');
+        expect(queryParts.table).to.equal('etl.flat_hiv_summary_v15b');
         // if fields is null output default given columns
         expect(queryParts.columns).to.equal('t1.*,t3.given_name,t3.middle_name,t3.family_name,group_concat(identifier) as identifiers');
         expect(queryParts.where).to.include('t1.location_uuid = ? and date(t1.rtc_date) between ? and ? and next_clinical_datetime_hiv is null');
@@ -285,7 +285,7 @@ describe('CLINIC LEVEL ETL-SERVER TESTS', function () {
 
         // console.log('body2  ++', stub.args[0][0]);
         var queryParts = stub.args[0][0];
-        expect(queryParts.table).to.equal('etl.flat_hiv_summary');
+        expect(queryParts.table).to.equal('etl.flat_hiv_summary_v15b');
         expect(queryParts.where).to.include(options.params.uuid);
         expect(queryParts.group).to.be.an('array');
 
@@ -360,7 +360,7 @@ describe('CLINIC LEVEL ETL-SERVER TESTS', function () {
 
         // console.log('body2  ++', stub.args[0][0]);
         var queryParts = stub.args[0][0];
-        expect(queryParts.table).to.equal('etl.flat_hiv_summary');
+        expect(queryParts.table).to.equal('etl.flat_hiv_summary_v15b');
         expect(queryParts.where).to.include(options.params.uuid, options.params.startDate);
 
 
@@ -434,7 +434,7 @@ describe('CLINIC LEVEL ETL-SERVER TESTS', function () {
 
         // console.log('body2  ++', stub.args[0][0]);
         var queryParts = stub.args[0][0];
-        expect(queryParts.table).to.equal('etl.flat_hiv_summary');
+        expect(queryParts.table).to.equal('etl.flat_hiv_summary_v15b');
         expect(queryParts.where).to.include(options.params.uuid);
         // if fields is null output all columns
         expect(queryParts.columns).to.equal("t1.*,t2.gender,round(datediff(t1.encounter_datetime,t2.birthdate)/365) as age,group_concat(identifier) as identifiers");
@@ -522,7 +522,7 @@ describe('CLINIC LEVEL ETL-SERVER TESTS', function () {
 
         // console.log('body2  ++', stub.args[0][0]);
         var queryParts = stub.args[0][0];
-        expect(queryParts.table).to.equal('etl.flat_hiv_summary');
+        expect(queryParts.table).to.equal('etl.flat_hiv_summary_v15b');
         expect(queryParts.where).to.include(options.params.uuid);
         // if fields is null output all columns
         expect(queryParts.columns).to.equal("t1.*,t3.given_name,t3.middle_name,t3.family_name,group_concat(identifier) as identifiers");
@@ -601,7 +601,7 @@ describe('CLINIC LEVEL ETL-SERVER TESTS', function () {
 
         // console.log('body2  ++', stub.args[0][0]);
         var queryParts = stub.args[0][0];
-        expect(queryParts.table).to.equal('etl.flat_hiv_summary');
+        expect(queryParts.table).to.equal('etl.flat_hiv_summary_v15b');
         expect(queryParts.where).to.include(options.params.uuid);
         // if fields is null output all columns
         expect(queryParts.columns).to.equal("t1.*,t3.given_name,t3.middle_name,t3.family_name,group_concat(identifier) as identifiers");

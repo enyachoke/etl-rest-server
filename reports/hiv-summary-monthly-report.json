@@ -3,7 +3,7 @@
         "name": "hiv-summary-monthly-report",
         "table":{"schema":"etl","tableName":"dates","alias":"t2"},
         "joins":[
-            {"joinType":"JOIN","schema":"etl","tableName":"flat_hiv_summary","alias":"t1",
+            {"joinType":"JOIN","schema":"etl","tableName":"flat_hiv_summary_v15b","alias":"t1",
                 "joinExpression":"is_clinical_encounter=1 and encounter_datetime <= t2.endDate and coalesce(t1.death_date, out_of_care) is null"},
             {"joinType":"INNER JOIN","schema":"amrs","tableName":"location","alias":"t3",
                 "joinExpression":"t1.location_uuid = t3.uuid"},

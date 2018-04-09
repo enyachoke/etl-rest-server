@@ -1,7 +1,7 @@
    [
        {
         "name": "clinical-reminder-report",
-           "table":{"schema":"etl","tableName":"flat_hiv_summary","alias":"t1", "indexExpression":"FORCE INDEX (person_uuid)"},
+           "table":{"schema":"etl","tableName":"flat_hiv_summary_v15b","alias":"t1", "indexExpression":"FORCE INDEX (person_uuid)"},
            "joins":[
              {"joinType":"LEFT OUTER JOIN","schema":"etl","tableName":"flat_labs_and_imaging","alias":"t2","joinExpression":"date(t1.encounter_datetime) = date(t2.test_datetime)"},
              {"joinType":"INNER JOIN","schema":"amrs","tableName":"person","alias":"t5","joinExpression":"t5.person_id = t1.person_id"},
@@ -128,23 +128,7 @@
                "label":"vl_error_order_date",
                "type":"single",
                "sql":"t3.vl_error_order_date"
-             },
-             {
-               "label":"tb_prophylaxis_end_date",
-               "type":"single",
-               "sql":"DATE_ADD(t1.tb_prophylaxis_start_date, INTERVAL 180 DAY)"
-             },
-             {
-               "label":"tb_prophylaxis_start_date",
-               "type":"single",
-               "sql":"t1.tb_prophylaxis_start_date"
-             },
-             {
-               "label":"inh_treatment_days_remaining",
-               "type":"single",
-               "sql":"DATEDIFF(DATE_ADD(t1.tb_prophylaxis_start_date, INTERVAL 180 DAY), now())"
              }
-
 
            ],
            "orderBy":[
