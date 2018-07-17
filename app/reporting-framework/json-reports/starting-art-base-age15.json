@@ -1,5 +1,5 @@
 {
-    "name": "regimenDataSetbase",
+    "name": "StartingARTSetBaseAge15",
     "version": "1.0",
     "tag": "",
     "description": "",
@@ -31,23 +31,18 @@
         },
         {
             "type": "simple_column",
-            "alias": "location_id",
-            "column": "hmsd.location_id"
-        },
-        {
-            "type": "simple_column",
             "alias": "location_uuid",
             "column": "l.uuid"
         },
         {
             "type": "simple_column",
-            "alias": "location",
-            "column": "l.name"
+            "alias": "location_id",
+            "column": "hmsd.arv_first_regimen_location_id"
         },
         {
             "type": "simple_column",
-            "alias": "arv_first_regimen_location_id",
-            "column": "hmsd.arv_first_regimen_location_id"
+            "alias": "location",
+            "column": "l.name"
         },
         {
             "type": "derived_column",
@@ -59,53 +54,31 @@
         },
         {
             "type": "derived_column",
-            "alias": "arv_first_regimen_start_date",
-            "expressionType": "simple_expression",
-            "expressionOptions": {
-                "expression": "date_format(hmsd.arv_first_regimen_start_date,'%d-%m-%Y')"
-            }
-        },
-        {
-            "type": "derived_column",
-            "alias": "cur_regimen_arv_start_date",
-            "expressionType": "simple_expression",
-            "expressionOptions": {
-                "expression": "date_format(hmsd.arv_start_date,'%d-%m-%Y')"
-            }
-        },
-        {
-            "type": "simple_column",
-            "alias": "cur_arv_line",
-            "column": "hmsd.cur_arv_line"
-        },
-        {
-            "type": "simple_column",
-            "alias": "vl_1",
-            "column": "hmsd.vl_1"
-        },
-        {
-            "type": "derived_column",
-            "alias": "vl_1_date",
-            "expressionType": "simple_expression",
-            "expressionOptions": {
-                "expression": "date_format(hmsd.vl_1_date,'%d-%m-%Y')"
-            }
-        },
-        {
-            "type": "derived_column",
             "alias": "age_range",
             "expressionType": "case_statement",
             "expressionOptions": {
                 "caseOptions": [
                     {
-                        "condition": "hmsd.age < 15",
-                        "value": "lt_15"
+                        "condition": "hmsd.age < 1",
+                        "value": "0_to_1"
                     },
                     {
-                        "condition": "hmsd.age >= 15",
-                        "value": "gte_15"
+                        "condition": "hmsd.age between 1 and 9",
+                        "value": "below_15_years"
+                    },
+                    {
+                        "condition": "else",
+                        "value": "older_than_15"
                     }
                 ]
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "started_art",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "if(started_art_this_month=1  AND hmsd.location_id = arv_first_regimen_location_id,1,null)"
             }
         }
     ],
@@ -119,7 +92,7 @@
             },
             {
                 "filterType": "tableColumns",
-                "conditionExpression": "hmsd.location_id in ?",
+                "conditionExpression": "hmsd.arv_first_regimen_location_id in ?",
                 "parameterName": "locations"
             }
         ]
