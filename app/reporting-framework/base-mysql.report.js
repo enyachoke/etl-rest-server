@@ -88,7 +88,14 @@ import * as cervical_cancer_monthly_screening_summary_base from './json-reports/
 import * as enhanced_adherence_hiv_program_aggregate from './json-reports/enhanced-adherence-hiv-program-aggregate.json';
 import * as enhanced_adherence_hiv_program_base from './json-reports/enhanced-adherence-hiv-program-base';
 
-export class BaseMysqlReport {
+import * as breast_cancer_monthly_screening_summary_aggregate from './json-reports/breast-cancer-monthly-screening-summary-aggregate.json';
+import * as breast_cancer_monthly_screening_summary_base from './json-reports/breast-cancer-monthly-screening-summary-base.json';
+import * as breast_cancer_patient_list_template from './json-reports/breast-cancer-patient-list-template.json';
+
+import * as cervical_cancer_monthly_screening_summary_aggregate from './json-reports/cervical-cancer-monthly-screening-summary-aggregate.json';
+import * as cervical_cancer_monthly_screening_summary_base from './json-reports/cervical-cancer-monthly-screening-summary-base.json';
+
+export class BaseMysqlReport{
     constructor(reportName, params) {
         this.reportName = reportName;
         this.params = params;
@@ -107,6 +114,7 @@ export class BaseMysqlReport {
                     // generate query
                     that.generateReportQuery(that.reportSchemas, that.params)
                         .then((sqlQuery) => {
+                            // console.log(sqlQuery);
                             // allow user to use 'null' as parameter values
                             sqlQuery = sqlQuery.replace(/\'null\'/g, "null");
 
@@ -399,6 +407,24 @@ export class BaseMysqlReport {
                         enhancedAdherenceHIVProgramBase : enhanced_adherence_hiv_program_base
                     });
                     break;
+                case 'breastCancerMonthlySummaryAggregate':
+                    resolve({
+                        main: breast_cancer_monthly_screening_summary_aggregate,
+                        breastCancerMonthlySummaryBase: breast_cancer_monthly_screening_summary_base
+                    });
+                    break;
+                case 'breast_cancer_patient_list_template':
+                resolve({
+                    main: breast_cancer_patient_list_template
+                });
+                break;
+                case 'cervicalCancerMonthlySummaryAggregate':
+                resolve({
+                    main: cervical_cancer_monthly_screening_summary_aggregate,
+                    cervicalCancerMonthlyReportBase: cervical_cancer_monthly_screening_summary_base
+                });
+                break;
+
                 default:
                     reject('Unknown report ', reportName);
                     break;

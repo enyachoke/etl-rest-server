@@ -283,7 +283,7 @@
     "groupBy": {
         "groupParam": "groupByParam",
         "columns": [
-            "encounter_id"
+            "person_id"
         ]
     }
 }
