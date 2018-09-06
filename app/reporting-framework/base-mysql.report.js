@@ -85,6 +85,9 @@ import * as breast_cancer_patient_list_template from './json-reports/breast-canc
 import * as cervical_cancer_monthly_screening_summary_aggregate from './json-reports/cervical-cancer-monthly-screening-summary-aggregate.json';
 import * as cervical_cancer_monthly_screening_summary_base from './json-reports/cervical-cancer-monthly-screening-summary-base.json';
 
+import * as enhanced_adherence_hiv_program_aggregate from './json-reports/enhanced-adherence-hiv-program-aggregate.json';
+import * as enhanced_adherence_hiv_program_base from './json-reports/enhanced-adherence-hiv-program-base';
+
 export class BaseMysqlReport {
     constructor(reportName, params) {
         this.reportName = reportName;
@@ -388,6 +391,12 @@ export class BaseMysqlReport {
                     resolve({
                         main: clinical_reminders_report,
                         flatLabsAndImagingDataSetbase : labs_and_imaging_dataset_base
+                    });
+                    break;
+                 case 'enhancedAdherenceHIVProgramAggregate':
+                    resolve({
+                        main: enhanced_adherence_hiv_program_aggregate,
+                        enhancedAdherenceHIVProgramBase : enhanced_adherence_hiv_program_base
                     });
                     break;
                 default:
