@@ -1,0 +1,92 @@
+{
+    "name": "enhancedAdherenceHIVProgramBase",
+    "version": "1.0",
+    "tag": "",
+    "description": "",
+    "uses": [],
+    "sources": [
+        {
+            "table": "etl.flat_hiv_summary_v15b",
+            "alias": "fhs"
+        },
+        {
+            "table": "amrs.visit",
+            "alias": "visit",
+            "join": {
+                "type": "LEFT",
+                "joinCondition": "fhs.visit_id = visit.visit_id"
+            }
+        },
+        {
+            "table": "etl.program_visit_map",
+            "alias": "pvm",
+            "join": {
+                "type": "LEFT",
+                "joinCondition": "visit.visit_type_id = pvm.visit_type_id"
+            }
+        }
+    ],
+    "columns": [
+        {
+            "type": "simple_column",
+            "alias": "person_id",
+            "column": "fhs.person_id"
+        },
+        {
+            "type": "derived_column",
+            "alias": "not_virally_suppressed_not_in_enhanced_care",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "IF(pvm.program_type_id NOT IN (27),1,NULL)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "not_virally_suppressed_in_enhanced_care",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": " IF(pvm.program_type_id = 27,1,NULL)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "not_virally_suppressed_in_enhanced_care_vl_due",
+            "expressionType": "simple_expression",
+            "expressionOptions": {
+                "expression": "IF(pvm.program_type_id = 27 AND TIMESTAMPDIFF(DAY,vl_1_date,'{endDate}') > 90, 1 ,NULL)"
+            }
+        },
+        {
+            "type": "derived_column",
+            "alias": "mdt_form_completed",
+            "expressionOptions": {
+                "expression": "IF(pvm.program_type_id = 27 AND TIMESTAMPDIFF(DAY,vl_1_date,'{endDate}') > 90, 1 ,NULL)"
+            }
+        }
+    ],
+    "filters": {
+        "conditionJoinOperator": "and",
+        "conditions": [
+            {
+                "filterType": "tableColumns",
+                "conditionExpression": "date(fhs.encounter_datetime) >= ?",
+                "parameterName": "startDate"
+            },
+            {
+                "filterType": "tableColumns",
+                "conditionExpression": "date(fhs.encounter_datetime) <= ?",
+                "parameterName": "endDate"
+            },
+            {
+                "filterType": "tableColumns",
+                "conditionExpression": "fhs.location_uuid in (?)",
+                "parameterName": "locationUuids"
+            },
+            {
+                "filterType": "tableColumns",
+                "conditionExpression": "vl_1 >= 1000",
+                "parameterName": ""
+            }
+        ]
+    }
+}
