@@ -88,12 +88,6 @@ import * as cervical_cancer_monthly_screening_summary_base from './json-reports/
 import * as enhanced_adherence_hiv_program_aggregate from './json-reports/enhanced-adherence-hiv-program-aggregate.json';
 import * as enhanced_adherence_hiv_program_base from './json-reports/enhanced-adherence-hiv-program-base';
 
-import * as breast_cancer_monthly_screening_summary_aggregate from './json-reports/breast-cancer-monthly-screening-summary-aggregate.json';
-import * as breast_cancer_monthly_screening_summary_base from './json-reports/breast-cancer-monthly-screening-summary-base.json';
-import * as breast_cancer_patient_list_template from './json-reports/breast-cancer-patient-list-template.json';
-
-import * as cervical_cancer_monthly_screening_summary_aggregate from './json-reports/cervical-cancer-monthly-screening-summary-aggregate.json';
-import * as cervical_cancer_monthly_screening_summary_base from './json-reports/cervical-cancer-monthly-screening-summary-base.json';
 
 export class BaseMysqlReport{
     constructor(reportName, params) {
