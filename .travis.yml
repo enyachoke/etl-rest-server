@@ -25,3 +25,5 @@ env:
 deploy:
   provider: script
   script: bash docker/docker_push.sh
+  on:
+    all_branches: true
