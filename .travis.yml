@@ -9,7 +9,6 @@ before_install:
   - date
   - npm install -g node-gyp
   - docker build -f docker/etl-rest-server/Dockerfile -t enyachoke/etl-services:"$TRAVIS_BRANCH" .
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - cp $TRAVIS_BUILD_DIR/conf/config.example.json $TRAVIS_BUILD_DIR/conf/config.json
 addons:
   apt:
