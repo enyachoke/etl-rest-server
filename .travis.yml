@@ -2,10 +2,14 @@ sudo: required
 language: node_js
 node_js:
 - '10'
+services:
+  - docker
 before_install:
   - export TZ=Africa/Nairobi
   - date
   - npm install -g node-gyp
+  - docker build -f docker/etl-rest-server/Dockerfile -t "$DOCKER_PASSWORD"/etl-services:"$TRAVIS_BRANCH" .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - cp $TRAVIS_BUILD_DIR/conf/config.example.json $TRAVIS_BUILD_DIR/conf/config.json
 addons:
   apt:
@@ -18,3 +22,7 @@ script:
 - npm start
 env:
   - CXX=g++-5
+
+deploy:
+  provider: script
+  script: bash docker/docker_push.sh
